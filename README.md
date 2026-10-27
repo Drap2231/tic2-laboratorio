@@ -8,11 +8,10 @@ Docker Desktop con Docker Compose, o Docker Engine + Compose en Linux. Puertos l
 
 ## Iniciar
 
-1. Copiar `.env.example` a `.env` (en PowerShell: `Copy-Item .env.example .env`). Cambiar la contraseña antes de iniciar.
-2. Ejecutar `docker compose up --build -d`.
-3. Comprobar con `docker compose ps` y `docker compose logs dagster`.
-4. Abrir http://localhost:3000, buscar `pipeline_prestamos`, abrir **Launchpad** y lanzar la ejecución.
-5. Consultar la base:
+1. Ejecutar `docker compose up --build -d`.
+2. Comprobar con `docker compose ps` y `docker compose logs dagster`.
+3. Abrir http://localhost:3000, buscar `pipeline_prestamos`, abrir **Launchpad** y lanzar la ejecución.
+4. Consultar la base:
    `docker compose exec postgres psql -U tic2 -d prestamos -c "SELECT * FROM prestamos ORDER BY id_prestamo;"`
    Si cambiaste POSTGRES_USER/DB, cambia también los parámetros `-U` y `-d`.
 
@@ -33,11 +32,8 @@ En el Launchpad, los parámetros de la operación `leer` son `archivo`, `lote_id
 
 Para contar filas: `docker compose exec postgres psql -U tic2 -d prestamos -c "SELECT COUNT(*) FROM prestamos;"`.
 
-**Aviso:** Si detienes PostgreSQL, Dagster continúa activo porque son servicios separados. Docker Compose solo verifica la salud al iniciar. La prueba de lectura es una simulación controlada, no un fallo real del sistema de archivos.
+**Aviso:** Si se detiene PostgreSQL, Dagster continúa activo porque son servicios separados. Docker Compose solo verifica la salud al iniciar. La prueba de lectura es una simulación controlada, no un fallo real del sistema de archivos.
 
-## Evidencias para el informe
-
-Guardar captura del grafo, logs de ejecución correcta, logs de dos fallos, reintento, historial, consulta SQL y tabla de fallos reintentables/no reintentables. No se incluyen capturas ni resultados fabricados; deben obtenerse al ejecutar el proyecto.
 
 ## Contrato inicial con TIC 1
 
